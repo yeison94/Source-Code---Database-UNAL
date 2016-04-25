@@ -15,10 +15,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 var portlisten =  3000; 
 
 //Configure connection
-var username = 'yeison94';
-var passwordconnectingserver = '3137203715yeison94'; 
 var host = 'localhost';
-var port = '4929';
+var port = '4928';
 var databaserver = 'users';
 
 
@@ -29,7 +27,7 @@ var routes = require("./routes/users.js")(app);
 
 
 //connect with database users 
-mongoose.connect('mongodb://'+username+':'+passwordconnectingserver+'@'+host+':'+port+'/'+databaserver, function(err, res) {
+mongoose.connect('mongodb://'+host+':'+port+'/'+databaserver, function(err, res) {
 	if(err) {
 		console.log('Error connecting to Database. ' + err);
 	} else {
