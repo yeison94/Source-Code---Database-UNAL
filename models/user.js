@@ -1,3 +1,5 @@
+//Model that includes the information of a user
+
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
 

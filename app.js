@@ -11,23 +11,25 @@ var mongoose = require('mongoose');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//set port
+//it will listen for requests on port 3000 when the server starts
 var portlisten =  3000; 
 
 //Configure connection
 var host = 'localhost';
-var port = '4928';
 var databaserver = 'users';
+//port where listening mongo
+var port = '4928';
 
 
 
 // ROUTES 
 // ===================================================
+//The code with method is in this route
 var routes = require("./routes/users.js")(app);
 
 
 //connect with database users 
-mongoose.connect('mongodb://'+host+':'+port+'/'+databaserver, function(err, res) {
+mongoose.connect('mongodb://'+host+'/'+databaserver, function(err, res) {
 	if(err) {
 		console.log('Error connecting to Database. ' + err);
 	} else {
