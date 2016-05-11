@@ -18,8 +18,8 @@ var portlisten =  3000;
 var host = 'localhost';
 var databaserver = 'users';
 //port where listening mongo
-var port = '4928';
-
+var port = '27017';
+//4928
 
 
 // ROUTES 

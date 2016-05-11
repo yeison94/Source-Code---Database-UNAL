@@ -3,6 +3,64 @@ module.exports = function(app) {
 
 	var User = require('../models/user.js');
 
+	//Service register POST ContentType: "application/json"
+    app.post('/users',function(req, res) {
+
+    	//create a new instance of the User model
+	  	var user = new User({
+		  	facilitatorIds   :    req.body.facilitatorIds,
+		    pictures         :    req.body.pictures 
+	  	});
+	     
+	    //This method save object User in database users  
+	  	user.save(function(err) {
+	 
+	        if(!err) {
+		        console.log('USER REGISTRATED');
+		        res.json({success : true, userId : user._id});  
+	        } else {
+		        console.log('ERROR: ' + err);
+		        res.json({success : false});    
+	        }
+	  	});
+    });
+
+    //Service login POST ContentType: "application/json"
+    app.post('/user',function(req, res) {
+
+    	//This method returns one document that satisfies the specified query criteria 
+		User.findOne({ _id : req.body.userId}, function(err, user) {
+
+			if(!err) {
+			
+
+		        if(user != null){
+		          console.log("FOUND");
+
+		          //response JSON in case of found
+                  res.json({success: true, facilitatorIds : user.facilitatorIds});
+
+		        }else{
+		          console.log("NOT FOUND");
+
+		          //response JSON in case of not found
+		          res.json({success: true, error : null});
+		        }      
+		    }else {
+
+		        console.log('ERROR: ' + err.name);
+		        res.json({success: true, error : err.name}); 
+		    }
+		})
+
+
+
+    });
+
+
+
+
+
 	//GET - Verify email exist
 	app.get("/users", function(req, res) {
 
@@ -62,33 +120,7 @@ module.exports = function(app) {
   });
 
 
-    //POST - Insert a new User in the DB
-    app.post('/users',function(req, res) {
-
-    	console.log(req.body.email);
-
-    	//create a new instance of the User model
-	  	var user = new User({
-		  	name       :    req.body.name,
-		    email      :    req.body.email,
-		    password   :    req.body.password,
-		    gender     :    req.body.gender,
-		    picture    :    req.body.picture,
-		    externalID :    req.body.externalID  
-	  	});
-	     
-	    //This method save object User in database users  
-	  	user.save(function(err) {
-	 
-	        if(!err) {
-		        console.log('USER REGISTRATED');
-		        res.json({email : req.body.email, success : true, error : null });    
-	        } else {
-		        console.log('ERROR: ' + err);
-		        res.json({email : req.body.email, success : false, error : err.name});    
-	        }
-	  	});
-    });
+    
 
 }
  

@@ -4,14 +4,8 @@ var mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
 
 var userSchema = new Schema({
-	name: 		{ type: String },
-	email: 		{ type: String },
-	password: 	{ type: String },
-	gender:  	{ type: String, enum :
-					['Male', 'Female']
-				},
-	picture: 	{ type: Array },
-	externalID: { type: String }   
+	facilitatorIds: { type: Array },
+	pictures: 	    { type: Array } 
 });
 
 //La coleccion se llamara Users, ya que mongo toma el plural
