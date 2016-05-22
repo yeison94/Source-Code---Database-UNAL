@@ -8,8 +8,8 @@ var app = express();
 var mongoose = require('mongoose'); 
 
 //Configure the body parser to accept JSON and url encoded values 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({limit: '100mb'}));
+app.use(bodyParser.urlencoded({extended: true }));
 
 //it will listen for requests on port 3000 when the server starts
 var portlisten =  3000; 

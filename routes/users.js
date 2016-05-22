@@ -4,7 +4,7 @@ module.exports = function(app) {
 	var User = require('../models/user.js');
 
 	//Service register POST ContentType: "application/json"
-    app.post('/users',function(req, res) {
+    app.post('/register',function(req, res) {
 
     	//create a new instance of the User model
 	  	var user = new User({
@@ -26,13 +26,14 @@ module.exports = function(app) {
     });
 
     //Service login POST ContentType: "application/json"
-    app.post('/user',function(req, res) {
+    app.post('/login',function(req, res) {
+
+
 
     	//This method returns one document that satisfies the specified query criteria 
-		User.findOne({ _id : req.body.userId}, function(err, user) {
+		User.findById(req.body.userId, function(err, user) {
 
 			if(!err) {
-			
 
 		        if(user != null){
 		          console.log("FOUND");
@@ -44,12 +45,21 @@ module.exports = function(app) {
 		          console.log("NOT FOUND");
 
 		          //response JSON in case of not found
-		          res.json({success: true, error : null});
+		          res.json({success: false, error : "User not found"});
 		        }      
 		    }else {
 
+		    	if(err.name == "CastError"){
+
+		    		console.log('ERROR: ' + err.name);
+		    		res.json({success: false, error : "Size id is invalide"});
+
+		    	}else{
+
 		        console.log('ERROR: ' + err.name);
-		        res.json({success: true, error : err.name}); 
+		        res.json({success: false, error : err.name}); 
+
+		       }
 		    }
 		})
 
