@@ -52,11 +52,13 @@ module.exports = function(app) {
 		    	if(err.name == "CastError"){
 
 		    		console.log('ERROR: ' + err.name);
-		    		res.json({success: false, error : "Size id is invalide"});
+		    		 //response JSON in case of CastError
+		    		res.json({success: false, error : "ID size is invalide"});
 
 		    	}else{
 
 		        console.log('ERROR: ' + err.name);
+		        //response JSON in case of any undefined error
 		        res.json({success: false, error : err.name}); 
 
 		       }

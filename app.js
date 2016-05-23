@@ -15,11 +15,9 @@ app.use(bodyParser.urlencoded({extended: true }));
 var portlisten =  3000; 
 
 //Configure connection
-var host = 'localhost';
-var databaserver = 'users';
-//port where listening mongo
-var port = '27017';
-//4928
+var host = 'application:app@localhost'; //<username of mongo db>:<password of mongo db>@<host>
+var port = '4631'; //port of mongo server
+var databaserver = 'users'; //name of mongo database
 
 
 // ROUTES 
@@ -29,7 +27,7 @@ var routes = require("./routes/users.js")(app);
 
 
 //connect with database users 
-mongoose.connect('mongodb://'+host+'/'+databaserver, function(err, res) {
+mongoose.connect('mongodb://'+host+':'+port+'/'+databaserver, function(err, res) {
 	if(err) {
 		console.log('Error connecting to Database. ' + err);
 	} else {
@@ -39,8 +37,6 @@ mongoose.connect('mongodb://'+host+'/'+databaserver, function(err, res) {
 
 // START THE SERVER
 // =============================================================================
-
-
 
 var server = app.listen(portlisten, function () {
     console.log("Listening on port %s...", server.address().port);

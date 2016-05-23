@@ -8,5 +8,5 @@ var userSchema = new Schema({
 	pictures: 	    { type: Array } 
 });
 
-//La coleccion se llamara Users, ya que mongo toma el plural
+//The collection will be named Users, because mongo takes the plural
 module.exports = mongoose.model('User', userSchema);
